@@ -1,0 +1,53 @@
+﻿@model mathsociety.Models.AnnouncementViewModel
+
+@{
+    ViewBag.Title = "Create Announcement";
+    var errorMessage = TempData["ErrorMessage"]?.ToString();
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<hr />
+@if (!string.IsNullOrWhiteSpace(errorMessage))
+{
+    <div class="alert alert-danger">
+        <strong>Error!</strong> @errorMessage
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+
+<form action="Create" method="post" autocomplete="off">
+    <div class="mb-3">
+        <label for="Title" class="form-label">AnnouncementID</label>
+        <input type="text" class="form-control" id="AnnouncementID" name="AnnouncementID">
+        <span asp-validation-for="AnnouncementID" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Title</label>
+        <input type="text" class="form-control" name="Title" />
+        <span asp-validation-for="Title" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Content</label>
+        <input type="text" class="form-control" name="Content" />
+        <span asp-validation-for="Content" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Date</label>
+        <input type="text" class="form-control" name="Date" />
+        <span asp-validation-for="Date" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Author</label>
+        <input type="text" class="form-control" name="Author" />
+        <span asp-validation-for="Author" class="text-danger"></span>
+    </div>
+    <div class="d-grid gap-2">
+        <input type="submit" value="Create" class="btn btn-primary" />
+    </div>
+</form>
+@section Scripts {
+    @{
+    await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
